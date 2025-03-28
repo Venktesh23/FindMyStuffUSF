@@ -45,3 +45,79 @@ Follow these steps to get the project running locally:
    VITE_SUPABASE_URL=your-supabase-url
    VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
    VITE_GOOGLE_MAPS_API_KEY=your-google-maps-api-key
+
+4. **Start the Development Server**
+   ```bash
+   npm run dev
+
+5. **Open the App in Your Browser**
+   ```bash
+   http://localhost:5173
+
+
+## 🔍 Application Walkthrough
+
+---
+
+### 🏠 1. Welcome Screen – Login & Sign Up
+
+The home page greets users with a clean interface and options to either log in or sign up securely.  
+This ensures that only authenticated USF students can access the reporting and tracking features.
+
+📸 *Screenshot Placeholder – Login/Signup Page*  
+`![Login & Sign Up](path/to/login-signup.png)`
+
+---
+
+### 🔍 2. Main Home Page – Search & Report
+
+Once logged in, users land on the main home page, where they can either **search for lost items** or **report a new item**.  
+This acts as the central hub for navigation across the platform.
+
+📸 *Screenshot Placeholder – Main Home Page*  
+`![Home - Search & Report](path/to/home-search-report.png)`
+
+---
+
+### 👤 3. Profile Section
+
+Every user has a personalized profile section where they can:
+- View their reported items
+- Check the status (Lost, Found, Returned)
+- Edit or remove existing reports
+
+📸 *Screenshot Placeholder – Profile Page*  
+`![Profile](path/to/profile.png)`
+
+---
+
+### 📝 4. Report Lost or Found Item
+
+Users can report an item by providing:
+- Title
+- Description
+- Category (e.g., electronics, accessories, etc.)
+- Location (with Google Maps integration)
+- Optional image upload
+
+This ensures clear documentation and better chances of item recovery.
+
+📸 *Screenshot Placeholder – Report Form*  
+`![Report Item](path/to/report.png)`
+
+---
+
+### 🔎 5. Search Functionality
+
+The search section allows users to:
+- Filter items by category, location, or keywords
+- View results visually on a map or as a list
+- Click items for more details
+
+📸 *Screenshot Placeholder – Search Page*  
+`![Search](path/to/search.png)`
+
+---
+
+
+
