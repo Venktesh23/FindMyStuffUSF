@@ -35,3 +35,5 @@ Follow these steps to get the project running locally:
    ```bash
    git clone https://github.com/your-username/findmystuff-usf.git
    cd findmystuff-usf
+
+2. **Install Dependencies
