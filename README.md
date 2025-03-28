@@ -18,14 +18,13 @@ A modern web application built to help students at the **University of South Flo
 
 ## 🧰 Tech Stack
 
-- React 18 + TypeScript  
-- Node.js  
-- PostgreSQL  
-- Supabase (for auth and real-time)  
-- Google Maps API  
-- Tailwind CSS  
+- **React 18 + TypeScript** (Frontend)
+- **Node.js** (Backend)
+- **PostgreSQL** (Database)
+- **Supabase** (Authentication & Real-time updates)
+- **Google Maps API** (Location mapping)
+- **Tailwind CSS** (Styling/UI)
 
----
 
 ## ⚙️ Installation & Setup
 
