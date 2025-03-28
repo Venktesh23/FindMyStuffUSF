@@ -36,4 +36,5 @@ Follow these steps to get the project running locally:
    git clone https://github.com/your-username/findmystuff-usf.git
    cd findmystuff-usf
 
-2. **Install Dependencies
+2. **Install Dependencies**
+   npm install
