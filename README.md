@@ -1,44 +1,44 @@
-# 🧭 FindMyStuff@USF
+# 🧭 FindMyStuff - USF Lost & Found
 
-A modern web application built to help students at the **University of South Florida (USF)** report and find lost items around campus. Focused on enhancing the campus community by enabling easy, real-time item tracking and communication between students. 📍🎒
+![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
+![Version](https://img.shields.io/badge/version-1.0.0-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+
+A modern web application built to help students at the **University of South Florida (USF)** report and find lost items around campus. Focused on enhancing the campus community by enabling real-time item tracking and easy communication between students. 📍🎒
 
 ---
 
 ## 🌟 Key Features
 
-- 🔐 **User Authentication** – Secure sign-up/login with email & password using Supabase Auth
-- 📍 **Real-Time Lost Item Reporting** – Instantly log lost/found items with map-based locations
-- 🗺️ **Interactive Campus Map** – Integrated Google Maps with campus-specific markers
-- 🔎 **Advanced Search & Filtering** – Find items by category, date, location, and keywords
-- 🔔 **Real-Time Notifications** – Get alerts when similar items are found or updated
-- 👤 **User Profiles** – Manage your submissions and track item status
-- ✅ **Status Tracking** – Update and view item status: Lost, Found, Returned
+- 🔐 User authentication with email/password  
+- 📍 Real-time lost item reporting with map-based locations  
+- 🗺️ Interactive campus map using Google Maps  
+- 🔎 Advanced search and filtering options  
+- 🔔 Real-time notifications for matched or nearby items  
+- 👤 User profiles to manage items  
+- ✅ Track status of lost and found items  
 
 ---
 
 ## 🧰 Tech Stack
 
-| Layer          | Technology                         |
-|----------------|-------------------------------------|
-| **Frontend**   | React 18 + TypeScript              |
-| **Styling**    | Tailwind CSS                       |
-| **State Mgmt** | React Context API                  |
-| **Database**   | Supabase (PostgreSQL)              |
-| **Auth**       | Supabase Auth                      |
-| **Realtime**   | Supabase Realtime                  |
-| **Maps**       | Google Maps API                    |
-| **Deployment** | [Your Deployment Platform]         |
+- React 18 + TypeScript  
+- Node.js  
+- PostgreSQL  
+- Supabase (for auth and real-time)  
+- Google Maps API  
+- Tailwind CSS  
 
 ---
 
 ## ⚙️ Installation & Setup
 
-### 🔍 Prerequisites
+### Prerequisites
 
 - [Node.js](https://nodejs.org/) (v18 or above)
 - npm (v9+)
 
-### 📦 Installation Steps
+### Installation Steps
 
 ```bash
 # Clone the repository
@@ -47,3 +47,20 @@ cd findmystuff-usf
 
 # Install dependencies
 npm install
+
+### 🔐 Environment Variables
+
+Create a `.env` file in the root of the project and add the following keys:
+
+```env
+VITE_SUPABASE_URL=your-supabase-url
+VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
+VITE_GOOGLE_MAPS_API_KEY=your-google-maps-api-key
+
+### 🚀 Run the App Locally
+
+Once you've installed everything and configured the `.env` file, start the development server:
+
+```bash
+npm run dev
+
