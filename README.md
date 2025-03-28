@@ -39,3 +39,9 @@ Follow these steps to get the project running locally:
 2. **Install Dependencies**
    ```bash
    npm install
+
+3. **Create Environment Variables**
+   ```bash
+   VITE_SUPABASE_URL=your-supabase-url
+   VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
+   VITE_GOOGLE_MAPS_API_KEY=your-google-maps-api-key
