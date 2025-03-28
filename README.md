@@ -1,51 +1,49 @@
-# FindMyStuff - USF Lost & Found
+# 🧭 FindMyStuff@USF
 
-A web application that helps USF students and staff connect lost items with their owners across the campus.
+A modern web application built to help students at the **University of South Florida (USF)** report and find lost items around campus. Focused on enhancing the campus community by enabling easy, real-time item tracking and communication between students. 📍🎒
 
-## Features
+---
 
-- User authentication (signup, login, password reset)
-- Report lost items with location and images
-- Search and filter lost items
-- Interactive map integration
-- User profiles and item management
+## 🌟 Key Features
 
-## Tech Stack
+- 🔐 **User Authentication** – Secure sign-up/login with email & password using Supabase Auth
+- 📍 **Real-Time Lost Item Reporting** – Instantly log lost/found items with map-based locations
+- 🗺️ **Interactive Campus Map** – Integrated Google Maps with campus-specific markers
+- 🔎 **Advanced Search & Filtering** – Find items by category, date, location, and keywords
+- 🔔 **Real-Time Notifications** – Get alerts when similar items are found or updated
+- 👤 **User Profiles** – Manage your submissions and track item status
+- ✅ **Status Tracking** – Update and view item status: Lost, Found, Returned
 
-- React 18 with TypeScript
-- Vite
-- Tailwind CSS
-- Supabase (Database, Auth, Storage)
-- Google Maps API
-- React Router v6
+---
 
-## Environment Variables
+## 🧰 Tech Stack
 
-Create a `.env` file in the root directory with the following variables:
+| Layer          | Technology                         |
+|----------------|-------------------------------------|
+| **Frontend**   | React 18 + TypeScript              |
+| **Styling**    | Tailwind CSS                       |
+| **State Mgmt** | React Context API                  |
+| **Database**   | Supabase (PostgreSQL)              |
+| **Auth**       | Supabase Auth                      |
+| **Realtime**   | Supabase Realtime                  |
+| **Maps**       | Google Maps API                    |
+| **Deployment** | [Your Deployment Platform]         |
 
-```env
-VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
-VITE_GOOGLE_MAPS_API_KEY=your_google_maps_api_key
-```
+---
 
-## Development
+## ⚙️ Installation & Setup
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
+### 🔍 Prerequisites
 
-2. Start the development server:
-   ```bash
-   npm run dev
-   ```
+- [Node.js](https://nodejs.org/) (v18 or above)
+- npm (v9+)
 
-3. Build for production:
-   ```bash
-   npm run build
-   ```
+### 📦 Installation Steps
 
-## License
+```bash
+# Clone the repository
+git clone https://github.com/your-username/findmystuff-usf.git
+cd findmystuff-usf
 
-MIT
+# Install dependencies
+npm install
