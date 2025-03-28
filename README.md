@@ -1,8 +1,4 @@
-# 🧭 FindMyStuff - USF Lost & Found
-
-![Build Status](https://img.shields.io/badge/build-passing-brightgreen)
-![Version](https://img.shields.io/badge/version-1.0.0-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
+# 🧭 FindMyStuff@USF
 
 A modern web application built to help students at the **University of South Florida (USF)** report and find lost items around campus. Focused on enhancing the campus community by enabling real-time item tracking and easy communication between students. 📍🎒
 
@@ -33,34 +29,36 @@ A modern web application built to help students at the **University of South Flo
 
 ## ⚙️ Installation & Setup
 
-### Prerequisites
+Follow these steps to run the project locally:
 
-- [Node.js](https://nodejs.org/) (v18 or above)
-- npm (v9+)
-
-### Installation Steps
+### 1. Clone the Repository
 
 ```bash
-# Clone the repository
 git clone https://github.com/your-username/findmystuff-usf.git
 cd findmystuff-usf
-
-# Install dependencies
+2. Install Dependencies
+bash
+Copy
+Edit
 npm install
+3. Create Environment Variables
+Create a .env file in the root of the project and add the following:
 
-### 🔐 Environment Variables
-
-Create a `.env` file in the root of the project and add the following keys:
-
-```env
+env
+Copy
+Edit
 VITE_SUPABASE_URL=your-supabase-url
 VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
 VITE_GOOGLE_MAPS_API_KEY=your-google-maps-api-key
-
-### 🚀 Run the App Locally
-
-Once you've installed everything and configured the `.env` file, start the development server:
-
-```bash
+4. Start the Development Server
+bash
+Copy
+Edit
 npm run dev
+5. Open the App
+Visit the following URL in your browser:
 
+text
+Copy
+Edit
+http://localhost:5173
