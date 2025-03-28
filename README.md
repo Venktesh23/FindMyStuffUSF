@@ -37,4 +37,5 @@ Follow these steps to get the project running locally:
    cd findmystuff-usf
 
 2. **Install Dependencies**
+   ```bash
    npm install
