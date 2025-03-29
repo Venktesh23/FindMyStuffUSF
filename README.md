@@ -65,7 +65,7 @@ A step-by-step visual guide to help you understand how **FindMyStuff - USF Lost 
 
 The landing page that introduces the platform and allows users to get started.
 
-![Welcome](Welcomepage.png)
+![Welcome](WelcomePage.png)
 
 ---
 
@@ -73,7 +73,7 @@ The landing page that introduces the platform and allows users to get started.
 
 New users can sign up with their university email and secure password.
 
-![Signup](./screenshots/signup.png)
+![Signup](SignUp.png)
 
 ---
 
@@ -105,6 +105,6 @@ Users can report a lost or found item by entering details like category, descrip
 
 Easily search for lost or found items using keywords, filters, or the interactive campus map.
 
-![Search](./screenshots/search.png)
+![Search](Search.png)
 
 
