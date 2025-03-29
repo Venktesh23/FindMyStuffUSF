@@ -1,4 +1,6 @@
-# 🧭 FindMyStuff@USF
+#  FindMyStuff@USF
+
+[![Live Demo](https://img.shields.io/badge/Live-Demo-green?logo=netlify)](https://guileless-kitsune-a510c3.netlify.app)
 
 A modern web application built to help students at the **University of South Florida (USF)** report and find lost items around campus. Focused on enhancing the campus community by enabling real-time item tracking and easy communication between students. 📍🎒
 
