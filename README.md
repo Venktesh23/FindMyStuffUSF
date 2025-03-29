@@ -20,7 +20,7 @@ A modern web application built to help students at the **University of South Flo
 
 ## 🧰 Tech Stack
 
-- **React 18 + TypeScript** (Frontend)
+- **React.js + TypeScript** (Frontend)
 - **Node.js** (Backend)
 - **PostgreSQL** (Database)
 - **Supabase** (Authentication & Real-time updates)
