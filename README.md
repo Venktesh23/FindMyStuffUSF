@@ -33,7 +33,6 @@ A modern web application built to help students at the **University of South Flo
 Follow these steps to get the project running locally:
 
 1. **Clone the Repository**
-
    ```bash
    git clone https://github.com/your-username/findmystuff-usf.git
    cd findmystuff-usf
@@ -55,7 +54,6 @@ Follow these steps to get the project running locally:
 5. **Open the App in Your Browser**
    ```bash
    http://localhost:5173
-
 
 ## 🧑‍💻 App Walkthrough
 
