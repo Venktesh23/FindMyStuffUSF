@@ -81,7 +81,7 @@ New users can sign up with their university email and secure password.
 
 After login, users can search for items or report a new one right from the home dashboard.
 
-![Home](./screenshots/home.png)
+![Home](HomePage.png)
 
 ---
 
