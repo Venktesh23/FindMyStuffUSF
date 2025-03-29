@@ -97,7 +97,7 @@ Users can manage all their submitted items and update their status.
 
 Users can report a lost or found item by entering details like category, description, and location.
 
-![Report](./screenshots/report.png)
+![Report](report.png)
 
 ---
 
