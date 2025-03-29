@@ -65,7 +65,7 @@ A step-by-step visual guide to help you understand how **FindMyStuff - USF Lost 
 
 The landing page that introduces the platform and allows users to get started.
 
-![Welcome](./Welcome page.png)
+![Welcome](Welcomepage.png)
 
 ---
 
