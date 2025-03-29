@@ -89,7 +89,7 @@ After login, users can search for items or report a new one right from the home 
 
 Users can manage all their submitted items and update their status.
 
-![Profile](./screenshots/profile.png)
+![Profile](ProfileSection.png)
 
 ---
 
