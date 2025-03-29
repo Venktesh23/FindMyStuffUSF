@@ -55,69 +55,56 @@ Follow these steps to get the project running locally:
    http://localhost:5173
 
 
-## 🔍 Application Walkthrough
+## 🧭 App Walkthrough
+
+A step-by-step visual guide to help you understand how **FindMyStuff - USF Lost & Found** works.
 
 ---
 
-### 🏠 1. Welcome Screen – Login & Sign Up
+### 🏁 1. Welcome Screen
 
-The home page greets users with a clean interface and options to either log in or sign up securely.  
-This ensures that only authenticated USF students can access the reporting and tracking features.
+The landing page that introduces the platform and allows users to get started.
 
-📸 *Screenshot Placeholder – Login/Signup Page*  
-`![Login & Sign Up](path/to/login-signup.png)`
+![Welcome](./screenshots/welcome.png)
 
 ---
 
-### 🔍 2. Main Home Page – Search & Report
+### 🔐 2. Sign Up Screen
 
-Once logged in, users land on the main home page, where they can either **search for lost items** or **report a new item**.  
-This acts as the central hub for navigation across the platform.
+New users can sign up with their university email and secure password.
 
-📸 *Screenshot Placeholder – Main Home Page*  
-`![Home - Search & Report](path/to/home-search-report.png)`
+![Signup](./screenshots/signup.png)
 
 ---
 
-### 👤 3. Profile Section
+### 🏠 3. Home Page
 
-Every user has a personalized profile section where they can:
-- View their reported items
-- Check the status (Lost, Found, Returned)
-- Edit or remove existing reports
+After login, users can search for items or report a new one right from the home dashboard.
 
-📸 *Screenshot Placeholder – Profile Page*  
-`![Profile](path/to/profile.png)`
+![Home](./screenshots/home.png)
 
 ---
 
-### 📝 4. Report Lost or Found Item
+### 👤 4. Profile Page
 
-Users can report an item by providing:
-- Title
-- Description
-- Category (e.g., electronics, accessories, etc.)
-- Location (with Google Maps integration)
-- Optional image upload
+Users can manage all their submitted items and update their status.
 
-This ensures clear documentation and better chances of item recovery.
-
-📸 *Screenshot Placeholder – Report Form*  
-`![Report Item](path/to/report.png)`
+![Profile](./screenshots/profile.png)
 
 ---
 
-### 🔎 5. Search Functionality
+### 📝 5. Report an Item
 
-The search section allows users to:
-- Filter items by category, location, or keywords
-- View results visually on a map or as a list
-- Click items for more details
+Users can report a lost or found item by entering details like category, description, and location.
 
-📸 *Screenshot Placeholder – Search Page*  
-`![Search](path/to/search.png)`
+![Report](./screenshots/report.png)
 
 ---
 
+### 🔎 6. Search for Items
+
+Easily search for lost or found items using keywords, filters, or the interactive campus map.
+
+![Search](./screenshots/search.png)
 
 
