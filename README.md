@@ -1,110 +1,142 @@
-#  FindMyStuff@USF
+# FindMyStuff@USF
 
 [![Live Demo](https://img.shields.io/badge/Live-Demo-green?logo=netlify)](https://guileless-kitsune-a510c3.netlify.app)
 
-A modern web application built to help students at the **University of South Florida (USF)** report and find lost items around campus. Focused on enhancing the campus community by enabling real-time item tracking and easy communication between students. 📍🎒
+A full-stack web application designed to help University of South Florida (USF) students report and recover lost items across campus. The platform provides real-time location tracking, advanced search capabilities, and seamless user authentication to facilitate efficient lost-and-found operations within the campus community.
 
----
+## Overview
 
-## Key Features
+FindMyStuff@USF addresses the common challenge of lost items on university campuses by providing a centralized platform where students can report lost items, search for found items, and communicate with other users. The application leverages geolocation services to pinpoint item locations on an interactive campus map, making it easier to reunite students with their belongings.
 
--  User authentication with email/password  
--  Real-time lost item reporting with map-based locations  
--  Interactive campus map using Google Maps  
--  Advanced search and filtering options  
--  Real-time notifications for matched or nearby items  
--  User profiles to manage items  
--  Track status of lost and found items  
+## Features
 
----
+- **User Authentication**: Secure email/password authentication with session management
+- **Item Reporting**: Submit detailed reports for lost or found items with category classification
+- **Geolocation Services**: Interactive Google Maps integration for precise location marking
+- **Advanced Search**: Filter items by category, location, date, and keyword
+- **Real-time Updates**: Live notifications when items matching user queries are reported
+- **User Dashboard**: Centralized profile management for tracking submitted items and status updates
+- **Item Status Tracking**: Monitor the lifecycle of reported items (active, resolved, expired)
 
-##  Tech Stack
+## Technology Stack
 
-- **React.js + TypeScript** (Frontend)
-- **Node.js** (Backend)
-- **PostgreSQL** (Database)
-- **Supabase** (Authentication & Real-time updates)
-- **Google Maps API** (Location mapping)
-- **Tailwind CSS** (Styling/UI)
+### Frontend
+- **React 18** with **TypeScript** for type-safe component development
+- **Tailwind CSS** for responsive UI design
+- **Google Maps API** for location-based features
+- **Vite** as the build tool and development server
 
+### Backend & Services
+- **Supabase** for authentication, real-time database, and storage
+- **PostgreSQL** as the primary relational database
+- **Row Level Security (RLS)** for data access control
 
-## ⚙️ Installation & Setup
+### Development Tools
+- **ESLint** for code quality
+- **TypeScript** for static type checking
+- **Git** for version control
 
-Follow these steps to get the project running locally:
+## Getting Started
 
-1. **Clone the Repository**
+### Prerequisites
+
+- Node.js (v16 or higher)
+- npm or yarn
+- Supabase account
+- Google Maps API key
+
+### Installation
+
+1. **Clone the repository**
    ```bash
    git clone https://github.com/your-username/findmystuff-usf.git
    cd findmystuff-usf
+   ```
 
-2. **Install Dependencies**
+2. **Install dependencies**
    ```bash
    npm install
+   ```
 
-3. **Create Environment Variables**
-   ```bash
-   VITE_SUPABASE_URL=your-supabase-url
+3. **Configure environment variables**
+   
+   Create a `.env` file in the root directory:
+   ```env
+   VITE_SUPABASE_URL=your-supabase-project-url
    VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
    VITE_GOOGLE_MAPS_API_KEY=your-google-maps-api-key
+   ```
 
-4. **Start the Development Server**
+4. **Run database migrations**
+   
+   Apply the Supabase migrations located in `supabase/migrations/`
+
+5. **Start the development server**
    ```bash
    npm run dev
+   ```
 
-5. **Open the App in Your Browser**
-   ```bash
-   http://localhost:5173
+6. **Access the application**
+   
+   Navigate to `http://localhost:5173` in your browser
 
-##  App Walkthrough
+## Project Structure
 
-A step-by-step visual guide to help you understand how **FindMyStuff - USF Lost & Found** works.
+```
+findmystuff-usf/
+├── src/
+│   ├── components/     # Reusable React components
+│   ├── pages/          # Page-level components
+│   ├── hooks/          # Custom React hooks
+│   ├── lib/            # Utility functions and configurations
+│   ├── types/          # TypeScript type definitions
+│   └── App.tsx         # Root application component
+├── supabase/
+│   └── migrations/     # Database schema migrations
+├── public/             # Static assets
+└── package.json
+```
 
----
+## Database Schema
 
-###  1. Welcome Screen
+The application uses PostgreSQL with the following primary tables:
 
-The landing page that introduces the platform and allows users to get started.
+- **users**: User profiles and authentication data
+- **items**: Lost and found item records with metadata
+- **locations**: Geographic coordinates for item locations
+- **notifications**: User notification queue for matches and updates
 
-![Welcome](docs/screenshots/WelcomePage.png)
+## Development
 
----
+### Available Scripts
 
-###  2. Sign Up Screen
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
 
-New users can sign up with their university email and secure password.
+### Code Style
 
-![Signup](docs/screenshots/SignUp.png)
+This project follows standard TypeScript and React best practices. Please ensure all code passes ESLint checks before committing.
 
----
+## Deployment
 
-###  3. Home Page
+The application is deployed on Netlify with continuous deployment from the main branch. The live demo is available at the badge link above.
 
-After login, users can search for items or report a new one right from the home dashboard.
+## Contributing
 
-![Home](docs/screenshots/HomePage.png)
+Contributions are welcome. Please follow these guidelines:
 
----
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/your-feature`)
+3. Commit your changes (`git commit -m 'Add new feature'`)
+4. Push to the branch (`git push origin feature/your-feature`)
+5. Open a Pull Request
 
-###  4. Profile Page
+## License
 
-Users can manage all their submitted items and update their status.
+This project is developed as part of an academic initiative at the University of South Florida.
 
-![Profile](docs/screenshots/ProfileSection.png)
+## Contact
 
----
-
-###  5. Report an Item
-
-Users can report a lost or found item by entering details like category, description, and location.
-
-![Report](docs/screenshots/ReportSection.png)
-
----
-
-###  6. Search for Items
-
-Easily search for lost or found items using keywords, filters, or the interactive campus map.
-
-![Search](docs/screenshots/Search.png)
-
-
+For questions or feedback regarding this project, please open an issue on the GitHub repository.
