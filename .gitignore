@@ -22,9 +22,16 @@ yarn-error.log*
 # Editor
 .vscode
 .idea
+.cursor
 *.swp
 *.swo
 
 # OS
 .DS_Store
 Thumbs.db
+
+# Test files
+test-*.js
+*-test.js
+*.test.js
+SETUP-GUIDE.md

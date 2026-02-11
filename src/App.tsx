@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { supabase } from './lib/supabase';
-import Navbar from './components/Navbar';
 import Welcome from './pages/Welcome';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -56,7 +55,6 @@ function App() {
   return (
     <Router>
       <div className="min-h-screen bg-gray-50">
-        {isAuthenticated && <Navbar />}
         <GoogleMapsWrapper>
           <Routes>
             <Route path="/" element={!isAuthenticated ? <Welcome /> : <Navigate to="/home" replace />} />
