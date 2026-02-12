@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import { LogIn, Mail, Lock, User } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { supabase } from '../lib/supabase';
+import { useAuth } from '../contexts/AuthContext';
 
-interface LoginProps {
-  onLogin: () => void;
-}
-
-const Login = ({ onLogin }: LoginProps) => {
+const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const { signIn, signUp } = useAuth();
   const [isLogin, setIsLogin] = useState(location.pathname === '/login');
   const [formData, setFormData] = useState({
     email: '',
@@ -39,27 +36,11 @@ const Login = ({ onLogin }: LoginProps) => {
       }
 
       if (isLogin) {
-        const { error: signInError } = await supabase.auth.signInWithPassword({
-          email: formData.email,
-          password: formData.password,
-        });
-
-        if (signInError) {
-          if (signInError.message === 'Invalid login credentials') {
-            throw new Error('Invalid email or password. Please try again or reset your password.');
-          }
-          throw signInError;
-        }
+        await signIn(formData.email, formData.password);
       } else {
-        const { error: signUpError } = await supabase.auth.signUp({
-          email: formData.email,
-          password: formData.password,
-        });
-
-        if (signUpError) throw signUpError;
+        await signUp(formData.email, formData.password);
       }
 
-      onLogin();
       navigate('/home');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
@@ -81,6 +62,13 @@ const Login = ({ onLogin }: LoginProps) => {
           <p className="text-lg text-gray-600">
             {isLogin ? 'Sign in to your account' : 'Join the USF Lost & Found community'}
           </p>
+          {!isLogin && (
+            <div className="mt-3 bg-usf-green/10 border border-usf-green/20 rounded-lg px-4 py-2">
+              <p className="text-sm text-gray-700">
+                <span className="font-semibold">Note:</span> Only USF email addresses (@usf.edu) are accepted
+              </p>
+            </div>
+          )}
         </div>
 
         {error && (
@@ -101,7 +89,7 @@ const Login = ({ onLogin }: LoginProps) => {
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="pl-10 w-full p-3 border border-gray-300 rounded-xl text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-usf-green focus:border-transparent transition-all duration-200"
-                placeholder="Email address"
+                placeholder="USF Email (@usf.edu)"
                 disabled={loading}
               />
             </div>

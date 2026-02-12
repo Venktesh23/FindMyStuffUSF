@@ -3,6 +3,7 @@ import { Camera, MapPin, Crosshair } from 'lucide-react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../lib/supabase';
+import { useAuth } from '../contexts/AuthContext';
 import BackButton from '../components/BackButton';
 
 const USF_CENTER = {
@@ -24,6 +25,7 @@ interface FormData {
 
 const ReportItem = () => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const [selectedLocation, setSelectedLocation] = useState(USF_CENTER);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
@@ -120,15 +122,14 @@ const ReportItem = () => {
         }
       }
 
-      const { data: session } = await supabase.auth.getSession();
-      if (!session.session?.user.id) {
+      if (!user?.id) {
         throw new Error('User not authenticated');
       }
 
       const { error: insertError } = await supabase
         .from('lost_items')
         .insert({
-          user_id: session.session.user.id,
+          user_id: user.id,
           name: formData.name,
           category: formData.category,
           location_lat: selectedLocation.lat,

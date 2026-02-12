@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Mail } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { supabase } from '../lib/supabase';
+import { useAuth } from '../contexts/AuthContext';
 import BackButton from '../components/BackButton';
 
 const ForgotPassword = () => {
+  const { resetPassword } = useAuth();
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -16,12 +17,11 @@ const ForgotPassword = () => {
     setLoading(true);
 
     try {
-      const { error: resetError } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/reset-password`,
-      });
+      if (!email.toLowerCase().endsWith('@usf.edu')) {
+        throw new Error('Only University of South Florida (@usf.edu) email addresses are allowed');
+      }
 
-      if (resetError) throw resetError;
-
+      await resetPassword(email);
       setSuccess(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');

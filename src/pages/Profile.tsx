@@ -14,6 +14,7 @@ import {
   Legend
 } from 'chart.js';
 import { supabase } from '../lib/supabase';
+import { useAuth } from '../contexts/AuthContext';
 import type { LostItem } from '../types/supabase';
 import BackButton from '../components/BackButton';
 
@@ -29,7 +30,7 @@ ChartJS.register(
 
 const Profile = () => {
   const navigate = useNavigate();
-  const [userEmail, setUserEmail] = useState<string | null>(null);
+  const { user, signOut } = useAuth();
   const [lostItems, setLostItems] = useState<LostItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [logoutLoading, setLogoutLoading] = useState(false);
@@ -41,32 +42,31 @@ const Profile = () => {
   });
 
   useEffect(() => {
-    loadUserData();
-  }, []);
+    if (user) {
+      loadUserData();
+    }
+  }, [user]);
 
   const loadUserData = async () => {
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (session?.user) {
-        setUserEmail(session.user.email);
+      if (!user) return;
 
-        const { data: items, error } = await supabase
-          .from('lost_items')
-          .select('*')
-          .eq('user_id', session.user.id)
-          .order('created_at', { ascending: false });
+      const { data: items, error } = await supabase
+        .from('lost_items')
+        .select('*')
+        .eq('user_id', user.id)
+        .order('created_at', { ascending: false });
 
-        if (error) throw error;
-        setLostItems(items || []);
+      if (error) throw error;
+      setLostItems(items || []);
 
-        // Calculate statistics
-        const foundItems = items?.filter(item => item.status === 'found').length || 0;
-        setStats({
-          totalItems: items?.length || 0,
-          foundItems,
-          successRate: items?.length ? (foundItems / items.length) * 100 : 0
-        });
-      }
+      // Calculate statistics
+      const foundItems = items?.filter(item => item.status === 'found').length || 0;
+      setStats({
+        totalItems: items?.length || 0,
+        foundItems,
+        successRate: items?.length ? (foundItems / items.length) * 100 : 0
+      });
     } catch (error) {
       console.error('Error loading user data:', error);
     } finally {
@@ -77,8 +77,7 @@ const Profile = () => {
   const handleLogout = async () => {
     try {
       setLogoutLoading(true);
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
+      await signOut();
       navigate('/');
     } catch (error) {
       console.error('Error logging out:', error);
@@ -155,7 +154,7 @@ const Profile = () => {
               </div>
               <div>
                 <h2 className="text-xl font-semibold text-gray-900">Profile</h2>
-                <p className="text-sm text-gray-600">{userEmail}</p>
+                <p className="text-sm text-gray-600">{user?.email}</p>
               </div>
             </div>
 

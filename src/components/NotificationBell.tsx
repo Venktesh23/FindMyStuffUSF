@@ -1,27 +1,30 @@
 import React, { useState, useEffect } from 'react';
 import { Bell } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { useAuth } from '../contexts/AuthContext';
 import toast from 'react-hot-toast';
 
 const NotificationBell = () => {
+  const { user } = useAuth();
   const [hasNewNotifications, setHasNewNotifications] = useState(false);
   const [notifications, setNotifications] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
-    fetchNotifications();
-    subscribeToNotifications();
-  }, []);
+    if (user) {
+      fetchNotifications();
+      subscribeToNotifications();
+    }
+  }, [user]);
 
   const fetchNotifications = async () => {
     try {
-      const { data: { session } } = await supabase.auth.getSession();
-      if (!session) return;
+      if (!user) return;
 
       const { data, error } = await supabase
         .from('notifications')
         .select('*')
-        .eq('user_id', session.user.id)
+        .eq('user_id', user.id)
         .order('created_at', { ascending: false })
         .limit(5);
 
