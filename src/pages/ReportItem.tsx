@@ -126,7 +126,7 @@ const ReportItem = () => {
         throw new Error('User not authenticated');
       }
 
-      const { error: insertError } = await supabase
+      const { data: insertedItem, error: insertError } = await supabase
         .from('lost_items')
         .insert({
           user_id: user.id,
@@ -137,9 +137,22 @@ const ReportItem = () => {
           image_url: imageUrl,
           contact_info: formData.contact,
           status: 'pending'
-        });
+        })
+        .select('id')
+        .single();
 
       if (insertError) throw insertError;
+
+      // DASH10-5: Log activity for dashboard Recent Activity
+      if (insertedItem?.id) {
+        await supabase.from('activity_events').insert({
+          user_id: user.id,
+          type: 'ITEM_REPORTED',
+          title: formData.name,
+          description: `Reported as ${formData.category}`,
+          item_id: insertedItem.id
+        });
+      }
 
       navigate('/profile');
     } catch (err) {

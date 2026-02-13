@@ -1,4 +1,5 @@
 import React from 'react';
+import { Toaster } from 'react-hot-toast';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import Welcome from './pages/Welcome';
@@ -61,6 +62,7 @@ function App() {
     <AuthProvider>
       <Router>
         <div className="min-h-screen bg-gray-50">
+          <Toaster position="top-center" />
           <GoogleMapsWrapper>
             <AppRoutes />
           </GoogleMapsWrapper>

@@ -10,3 +10,13 @@ export interface LostItem {
   created_at: string;
   status: string;
 }
+
+export interface ActivityEvent {
+  id: string;
+  user_id: string;
+  type: string;
+  title: string;
+  description: string | null;
+  item_id: string | null;
+  created_at: string;
+}
