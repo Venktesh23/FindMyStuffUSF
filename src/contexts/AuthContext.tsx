@@ -2,13 +2,17 @@ import React, { createContext, useContext, useEffect, useState } from 'react';
 import { User, Session } from '@supabase/supabase-js';
 import { supabase } from '../lib/supabase';
 
+interface SignUpResult {
+  needsEmailConfirmation?: boolean;
+}
+
 interface AuthContextType {
   user: User | null;
   session: Session | null;
   isAuthenticated: boolean;
   isLoading: boolean;
   signIn: (email: string, password: string) => Promise<void>;
-  signUp: (email: string, password: string) => Promise<void>;
+  signUp: (email: string, password: string) => Promise<SignUpResult>;
   signOut: () => Promise<void>;
   resetPassword: (email: string) => Promise<void>;
 }
@@ -78,7 +82,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setUser(data.user);
   };
 
-  const signUp = async (email: string, password: string) => {
+  const signUp = async (email: string, password: string): Promise<SignUpResult> => {
     // Validate USF email
     if (!email.toLowerCase().endsWith('@usf.edu')) {
       throw new Error('Only University of South Florida (@usf.edu) email addresses are allowed');
@@ -91,11 +95,14 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
     if (error) throw error;
 
-    // Session will be set automatically via onAuthStateChange
+    // Session will be set automatically via onAuthStateChange when they confirm
     if (data.session) {
       setSession(data.session);
       setUser(data.user);
+      return {};
     }
+    // Email confirmation required — no session until they confirm
+    return { needsEmailConfirmation: true };
   };
 
   const signOut = async () => {

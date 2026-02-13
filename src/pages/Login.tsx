@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { LogIn, Mail, Lock, User } from 'lucide-react';
+import { LogIn, Mail, Lock, User, ArrowLeft } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -14,15 +14,17 @@ const Login = () => {
     confirmPassword: ''
   });
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
     setLoading(true);
 
     try {
-      if (!formData.email || !formData.password) {
+      if (!formData.email?.trim() || !formData.password) {
         throw new Error('Please fill in all fields');
       }
 
@@ -36,12 +38,16 @@ const Login = () => {
       }
 
       if (isLogin) {
-        await signIn(formData.email, formData.password);
+        await signIn(formData.email.trim(), formData.password);
+        navigate('/home');
       } else {
-        await signUp(formData.email, formData.password);
+        const result = await signUp(formData.email.trim(), formData.password);
+        if (result.needsEmailConfirmation) {
+          setSuccess('Account created! Please check your USF email to confirm your account before signing in.');
+        } else {
+          navigate('/home');
+        }
       }
-
-      navigate('/home');
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
@@ -52,6 +58,13 @@ const Login = () => {
   return (
     <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl">
+        <Link
+          to="/"
+          className="flex items-center text-usf-green hover:text-usf-green/80 transition-colors mb-6 w-fit"
+        >
+          <ArrowLeft className="w-5 h-5 mr-2" />
+          Back to home
+        </Link>
         <div className="text-center">
           <div className="bg-usf-green/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
             <LogIn className="h-10 w-10 text-usf-green" />
@@ -74,6 +87,12 @@ const Login = () => {
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg">
             {error}
+          </div>
+        )}
+
+        {success && (
+          <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
+            {success}
           </div>
         )}
 
@@ -155,6 +174,7 @@ const Login = () => {
             onClick={() => {
               setIsLogin(!isLogin);
               setError('');
+              setSuccess('');
               navigate(isLogin ? '/signup' : '/login');
             }}
             className="text-lg text-usf-green hover:text-usf-green/80 transition-colors"

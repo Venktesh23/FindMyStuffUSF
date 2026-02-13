@@ -69,7 +69,7 @@ FindMyStuff@USF addresses the common challenge of lost items on university campu
 
 4. **Run database migrations**
    
-   Apply the Supabase migrations located in `supabase/migrations/`
+   Apply the Supabase migrations located in `src/supabase/migrations/`
 
 5. **Start the development server**
    ```bash
@@ -90,9 +90,9 @@ findmystuff-usf/
 │   ├── hooks/          # Custom React hooks
 │   ├── lib/            # Utility functions and configurations
 │   ├── types/          # TypeScript type definitions
+│   ├── supabase/
+│   │   └── migrations/ # Database schema migrations
 │   └── App.tsx         # Root application component
-├── supabase/
-│   └── migrations/     # Database schema migrations
 ├── public/             # Static assets
 └── package.json
 ```

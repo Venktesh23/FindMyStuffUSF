@@ -17,11 +17,15 @@ const ForgotPassword = () => {
     setLoading(true);
 
     try {
-      if (!email.toLowerCase().endsWith('@usf.edu')) {
+      const trimmedEmail = email.trim();
+      if (!trimmedEmail) {
+        throw new Error('Please enter your email address');
+      }
+      if (!trimmedEmail.toLowerCase().endsWith('@usf.edu')) {
         throw new Error('Only University of South Florida (@usf.edu) email addresses are allowed');
       }
 
-      await resetPassword(email);
+      await resetPassword(trimmedEmail);
       setSuccess(true);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
@@ -33,7 +37,7 @@ const ForgotPassword = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl">
-        <BackButton className="mb-6" />
+        <BackButton to="/login" className="mb-6" />
 
         <div className="text-center">
           <div className="bg-usf-green/10 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">

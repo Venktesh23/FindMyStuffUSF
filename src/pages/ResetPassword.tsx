@@ -14,25 +14,58 @@ const ResetPassword = () => {
   const [checkingToken, setCheckingToken] = useState(true);
 
   useEffect(() => {
-    // Check if we have a valid session (from the reset link)
-    const checkSession = async () => {
-      try {
-        const { data: { session } } = await supabase.auth.getSession();
-        
-        // If there's a session, the token is valid
-        if (session) {
-          setIsValidToken(true);
-        } else {
-          setError('Invalid or expired reset link. Please request a new one.');
-        }
-      } catch (err) {
-        setError('An error occurred. Please try again.');
-      } finally {
-        setCheckingToken(false);
+    let resolved = false;
+    let timeoutId: ReturnType<typeof setTimeout>;
+    let unsubscribe: (() => void) | null = null;
+
+    const applySession = (session: unknown) => {
+      if (resolved) return;
+      if (session) {
+        setIsValidToken(true);
+        setError(null);
+      }
+      resolved = true;
+      setCheckingToken(false);
+      if (!session) {
+        setError('Invalid or expired reset link. Please request a new one.');
       }
     };
 
-    checkSession();
+    const run = async () => {
+      try {
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session) {
+          applySession(session);
+          return;
+        }
+      } catch {
+        // continue to listener
+      }
+
+      const { data: { subscription } } = supabase.auth.onAuthStateChange(
+        (event, newSession) => {
+          if (event === 'PASSWORD_RECOVERY' || newSession) {
+            applySession(newSession);
+          }
+        }
+      );
+      unsubscribe = () => subscription.unsubscribe();
+
+      timeoutId = setTimeout(() => {
+        if (resolved) return;
+        supabase.auth.getSession().then(({ data: { session } }) => {
+          if (resolved) return;
+          applySession(session);
+        });
+      }, 500);
+    };
+
+    run();
+
+    return () => {
+      clearTimeout(timeoutId);
+      unsubscribe?.();
+    };
   }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {

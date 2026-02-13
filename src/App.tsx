@@ -22,12 +22,17 @@ const AppRoutes = () => {
     );
   }
 
+  // When running locally (dev), always show landing and auth pages so we can test them
+  const isDev = import.meta.env.DEV;
+  const showLandingAtRoot = !isAuthenticated || isDev;
+  const showAuthPages = !isAuthenticated || isDev;
+
   return (
     <Routes>
-      <Route path="/" element={!isAuthenticated ? <Welcome /> : <Navigate to="/home" replace />} />
-      <Route path="/login" element={!isAuthenticated ? <Login /> : <Navigate to="/home" replace />} />
-      <Route path="/signup" element={!isAuthenticated ? <Login /> : <Navigate to="/home" replace />} />
-      <Route path="/forgot-password" element={!isAuthenticated ? <ForgotPassword /> : <Navigate to="/home" replace />} />
+      <Route path="/" element={showLandingAtRoot ? <Welcome /> : <Navigate to="/home" replace />} />
+      <Route path="/login" element={showAuthPages ? <Login /> : <Navigate to="/home" replace />} />
+      <Route path="/signup" element={showAuthPages ? <Login /> : <Navigate to="/home" replace />} />
+      <Route path="/forgot-password" element={showAuthPages ? <ForgotPassword /> : <Navigate to="/home" replace />} />
       <Route path="/reset-password" element={<ResetPassword />} />
       <Route
         path="/home"
@@ -45,6 +50,8 @@ const AppRoutes = () => {
         path="/profile"
         element={isAuthenticated ? <Profile /> : <Navigate to="/login" replace />}
       />
+      {/* Catch-all: unknown paths redirect to landing */}
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };
