@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Search, SlidersHorizontal, MapPin, Calendar } from 'lucide-react';
+import { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
+import { Search } from 'lucide-react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
-import { supabase } from '../lib/supabase';
 import type { LostItem } from '../types/supabase';
 import BackButton from '../components/BackButton';
+import GoogleMapsWrapper from '../components/GoogleMapsWrapper';
 import { useRealtimeItems } from '../hooks/useRealtimeItems';
 import { useFuzzySearch } from '../hooks/useFuzzySearch';
 
@@ -25,7 +26,7 @@ const SearchItems = () => {
     borderRadius: '0.5rem'
   };
 
-  const filteredItems = React.useMemo(() => {
+  const filteredItems = useMemo(() => {
     let results = searchTerm ? search(searchTerm) : items;
 
     results = results.filter(item => {
@@ -80,13 +81,13 @@ const SearchItems = () => {
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
       case 'pending':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-slate-100 text-slate-800';
       case 'found':
-        return 'bg-green-100 text-green-800';
+        return 'bg-emerald-100 text-emerald-800';
       case 'closed':
         return 'bg-gray-100 text-gray-800';
       default:
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-slate-100 text-slate-800';
     }
   };
 
@@ -97,7 +98,7 @@ const SearchItems = () => {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold text-usf-green mb-2">Search Lost Items</h1>
-          <p className="text-gray-600 italic">Help a Fellow Bull Find Their Lost Item</p>
+          <p className="text-gray-600">Help a Fellow Bull Find Their Lost Item</p>
         </div>
         
         <div className="flex gap-4">
@@ -209,22 +210,24 @@ const SearchItems = () => {
         </div>
       ) : viewMode === 'map' ? (
         <div className="bg-white rounded-lg shadow-md p-6">
-          <GoogleMap
-            mapContainerStyle={mapContainerStyle}
-            center={{ lat: 28.0587, lng: -82.4139 }}
-            zoom={15}
-            onClick={() => setSelectedItem(null)}
-          >
-            {filteredItems.map((item) => (
-              <Marker
-                key={item.id}
-                position={{ lat: item.location_lat, lng: item.location_lng }}
-                title={item.name}
-                onClick={() => setSelectedItem(item)}
-              />
-            ))}
-          </GoogleMap>
-          
+          <GoogleMapsWrapper>
+            <GoogleMap
+              mapContainerStyle={mapContainerStyle}
+              center={{ lat: 28.0587, lng: -82.4139 }}
+              zoom={15}
+              onClick={() => setSelectedItem(null)}
+            >
+              {filteredItems.map((item) => (
+                <Marker
+                  key={item.id}
+                  position={{ lat: item.location_lat, lng: item.location_lng }}
+                  title={item.name}
+                  onClick={() => setSelectedItem(item)}
+                />
+              ))}
+            </GoogleMap>
+          </GoogleMapsWrapper>
+
           {selectedItem && (
             <div className="mt-4 p-4 bg-gray-50 rounded-lg">
               <h3 className="font-semibold">{selectedItem.name}</h3>
@@ -237,17 +240,21 @@ const SearchItems = () => {
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredItems.map((item) => (
-            <div key={item.id} className="bg-white rounded-lg shadow-md p-6">
+            <Link
+              key={item.id}
+              to={`/item/${item.id}`}
+              className="bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-150 p-6 group hover:-translate-y-0.5"
+            >
               {item.image_url && (
                 <div className="mb-4 h-48 rounded-md overflow-hidden">
                   <img
                     src={item.image_url}
                     alt={item.name}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-150"
                   />
                 </div>
               )}
-              <h3 className="text-lg font-semibold mb-2">{item.name}</h3>
+              <h3 className="text-lg font-semibold mb-2 text-usf-green group-hover:text-usf-green/80 transition-colors">{item.name}</h3>
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-gray-600">Category:</span>
                 <span className="px-2 py-1 bg-gray-100 rounded-full text-sm">
@@ -266,10 +273,7 @@ const SearchItems = () => {
                   Contact: {item.contact_info}
                 </p>
               </div>
-              {selectedItem?.id === item.id && (
-                <ItemRecommendations currentItem={item} allItems={items} />
-              )}
-            </div>
+            </Link>
           ))}
         </div>
       )}

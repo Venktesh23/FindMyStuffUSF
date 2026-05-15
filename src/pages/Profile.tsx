@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { User, LogOut, Settings, Bell, Shield, BarChart as ChartBar } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { User, LogOut, Bell, Shield } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Line } from 'react-chartjs-2';
@@ -97,13 +97,13 @@ const Profile = () => {
   const getStatusColor = (status: string) => {
     switch (status.toLowerCase()) {
       case 'pending':
-        return 'bg-yellow-100 text-yellow-800';
+        return 'bg-slate-100 text-slate-800';
       case 'found':
-        return 'bg-green-100 text-green-800';
+        return 'bg-emerald-100 text-emerald-800';
       case 'closed':
         return 'bg-gray-100 text-gray-800';
       default:
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-slate-100 text-slate-800';
     }
   };
 

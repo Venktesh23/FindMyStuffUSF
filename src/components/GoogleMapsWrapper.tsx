@@ -7,7 +7,7 @@ interface GoogleMapsWrapperProps {
   fallback?: React.ReactNode;
 }
 
-const libraries: ("places" | "drawing" | "geometry" | "localContext" | "visualization")[] = ["places"];
+const libraries: ("places")[] = ["places"];
 
 const GoogleMapsWrapper: React.FC<GoogleMapsWrapperProps> = ({ children, fallback }) => {
   const [error, setError] = useState<string | null>(null);
@@ -24,7 +24,7 @@ const GoogleMapsWrapper: React.FC<GoogleMapsWrapperProps> = ({ children, fallbac
 
   const handleError = (err: Error) => {
     console.error('Google Maps Error:', err);
-    setError('Maps functionality is currently limited. Please try again later.');
+    setError("This page can't load Google Maps correctly. For development, add http://localhost:* to your API key's HTTP referrer restrictions in Google Cloud Console and enable Maps JavaScript API + Places API.");
   };
 
   if (error) {
@@ -33,14 +33,14 @@ const GoogleMapsWrapper: React.FC<GoogleMapsWrapperProps> = ({ children, fallbac
     }
 
     return (
-      <div className="bg-yellow-50 border border-yellow-200 p-4 rounded-lg">
+      <div className="bg-amber-50 border border-amber-200 p-4 rounded-lg">
         <div className="flex items-start">
-          <AlertCircle className="w-5 h-5 text-yellow-600 mt-0.5 mr-3" />
+          <AlertCircle className="w-5 h-5 text-amber-600 mt-0.5 mr-3 shrink-0" />
           <div>
-            <h3 className="text-sm font-medium text-yellow-800">Limited Functionality</h3>
-            <p className="mt-1 text-sm text-yellow-700">{error}</p>
-            <p className="mt-2 text-sm text-yellow-700">
-              You can still use all other features of the application.
+            <h3 className="text-sm font-medium text-amber-800">Map loading failed</h3>
+            <p className="mt-1 text-sm text-amber-700">{error}</p>
+            <p className="mt-2 text-sm text-amber-700">
+              You can still use other features. Fix the API key settings to enable maps.
             </p>
           </div>
         </div>

@@ -57,7 +57,7 @@ const ForgotPassword = () => {
 
         {success ? (
           <div className="text-center">
-            <div className="bg-green-50 border border-green-200 text-green-600 px-4 py-3 rounded-lg mb-4">
+            <div className="bg-gray-50 border border-gray-200 text-gray-600 px-4 py-3 rounded-lg mb-4">
               Check your email for password reset instructions.
             </div>
             <Link

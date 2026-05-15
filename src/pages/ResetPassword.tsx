@@ -147,14 +147,14 @@ const ResetPassword = () => {
       <div className="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-2xl shadow-xl">
           <div className="text-center">
-            <div className="bg-green-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
-              <CheckCircle className="h-10 w-10 text-green-600" />
+            <div className="bg-gray-100 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
+              <CheckCircle className="h-10 w-10 text-gray-600" />
             </div>
             <h2 className="text-3xl font-bold text-gray-900 mb-2">Password Reset Successful!</h2>
             <p className="text-gray-600 mb-6">
               Your password has been successfully reset.
             </p>
-            <div className="bg-green-50 border border-green-200 text-green-600 px-4 py-3 rounded-lg mb-6">
+            <div className="bg-gray-50 border border-gray-200 text-gray-600 px-4 py-3 rounded-lg mb-6">
               Redirecting to login page...
             </div>
             <Link

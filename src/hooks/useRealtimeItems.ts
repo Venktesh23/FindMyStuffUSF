@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import type { LostItem } from '../types/supabase';
+import { DEMO_MODE, FAKE_ITEMS } from '../config/demo';
 
 export const useRealtimeItems = () => {
   const [items, setItems] = useState<LostItem[]>([]);
@@ -8,6 +9,12 @@ export const useRealtimeItems = () => {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    if (DEMO_MODE) {
+      setItems(FAKE_ITEMS);
+      setLoading(false);
+      return;
+    }
+
     fetchItems();
     
     const channel = supabase

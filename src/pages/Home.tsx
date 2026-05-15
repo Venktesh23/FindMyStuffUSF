@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Search, FileInput, Activity, FilePlus, Package, AlertCircle, LogOut } from 'lucide-react';
+import { Search, FileInput, Activity, FilePlus, Package, AlertCircle, LogOut, User } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
 import type { ActivityEvent } from '../types/supabase';
@@ -83,7 +83,7 @@ const Home = () => {
     }
   }, []);
 
-  // DASH10-9: Fetch in effects, limit 5, error UI — DASH10-# done
+  // DASH10-9: Fetch in effects, limit 3, error UI — DASH10-# done
   const fetchActivity = useCallback(async () => {
     if (!user?.id) return;
     setActivityError(null);
@@ -94,7 +94,7 @@ const Home = () => {
         .select('*')
         .eq('user_id', user.id)
         .order('created_at', { ascending: false })
-        .limit(5);
+        .limit(3);
 
       if (error) throw error;
       setActivity((data as ActivityEvent[]) ?? []);
@@ -153,14 +153,21 @@ const Home = () => {
             </span>
           </Link>
           <div className="flex items-center gap-4 font-sans">
-            <span className="text-sm font-medium text-slate-700">{displayName}</span>
+            <Link
+              to="/profile"
+              className="flex items-center gap-2 text-sm font-medium text-slate-700 hover:text-usf-green focus:outline-none focus-visible:ring-2 focus-visible:ring-usf-green focus-visible:ring-offset-2 rounded-lg px-2 py-1.5 transition-colors"
+              title="View profile"
+            >
+              <User className="w-4 h-4" aria-hidden />
+              {displayName}
+            </Link>
             <button
               type="button"
               onClick={handleSignOut}
               className="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-usf-green focus-visible:ring-offset-2 rounded-lg px-2 py-1.5 transition-colors"
             >
               <LogOut className="w-4 h-4" aria-hidden />
-              Sign out
+              Log out
             </button>
           </div>
         </div>
@@ -328,7 +335,7 @@ const Home = () => {
                   <li key={event.id}>
                     {event.item_id ? (
                       <Link
-                        to="/profile"
+                        to={`/item/${event.item_id}`}
                         className="flex items-center gap-4 p-4 rounded-xl bg-gray-50 hover:bg-gray-100 transition-colors duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-usf-green focus-visible:ring-offset-2 cursor-pointer"
                       >
                         {content}

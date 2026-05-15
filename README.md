@@ -67,16 +67,28 @@ FindMyStuff@USF addresses the common challenge of lost items on university campu
    VITE_GOOGLE_MAPS_API_KEY=your-google-maps-api-key
    ```
 
-4. **Run database migrations**
+4. **Configure Google Maps API key (required for map features)**
+   
+   To fix "This page can't load Google Maps correctly" during development:
+   
+   - Go to [Google Cloud Console](https://console.cloud.google.com/) → APIs & Services → Credentials
+   - Edit your API key
+   - Under **Application restrictions** → HTTP referrers, add:
+     - `http://localhost:*`
+     - `http://127.0.0.1:*`
+   - Under **API restrictions**, ensure **Maps JavaScript API** and **Places API** are enabled
+   - Enable billing on your project (required by Google; free tier includes credits)
+
+5. **Run database migrations**
    
    Apply the Supabase migrations located in `src/supabase/migrations/`
 
-5. **Start the development server**
+6. **Start the development server**
    ```bash
    npm run dev
    ```
 
-6. **Access the application**
+7. **Access the application**
    
    Navigate to `http://localhost:5173` in your browser
 

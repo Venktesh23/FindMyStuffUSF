@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Search, MapPin, Building2, Lock } from 'lucide-react';
 
@@ -26,22 +25,8 @@ const Welcome = () => {
       />
       {/* UI-3 done - Atmospheric background: gradient + soft glow + subtle grain texture */}
       
-      {/* UI-7: Navbar - reduced height, strengthened border, precise alignment with hero */}
-      <nav className="relative z-10 w-full px-6 py-3 border-b animate-fade-in" style={{ borderColor: '#d1d5db', borderBottomWidth: '1.5px' }}>
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center gap-2">
-            <Search className="h-7 w-7 text-usf-green" />
-            <span className="text-xl font-bold">
-              <span style={{ color: '#006747' }}>Find</span>
-              <span className="text-gray-900">MyStuff</span>
-            </span>
-          </div>
-        </div>
-      </nav>
-      {/* UI-7 done - Navbar refined: py-3, 1.5px border, max-w-7xl matches hero container */}
-
       {/* UX-1: Reduced top padding by 10-15% on desktop for less dead space */}
-      <div className="relative z-10 flex items-center justify-center px-4 py-9 sm:py-14">
+      <div className="relative z-10 flex items-center justify-center px-4 pt-20 pb-9 sm:pt-28 sm:pb-14">
         <div className="max-w-7xl w-full">
           {/* UI-6: Hero Section - subtle depth separation with fade gradient and soft divider */}
           <div className="relative text-center mb-12 sm:mb-16 animate-fade-in-up pb-10" style={{ 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Bell } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import { useAuth } from '../contexts/AuthContext';
@@ -7,13 +7,13 @@ import toast from 'react-hot-toast';
 const NotificationBell = () => {
   const { user } = useAuth();
   const [hasNewNotifications, setHasNewNotifications] = useState(false);
-  const [notifications, setNotifications] = useState([]);
+  const [notifications, setNotifications] = useState<any[]>([]);
   const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
     if (user) {
       fetchNotifications();
-      subscribeToNotifications();
+      return subscribeToNotifications();
     }
   }, [user]);
 
@@ -43,7 +43,7 @@ const NotificationBell = () => {
         event: 'INSERT',
         schema: 'public',
         table: 'notifications'
-      }, payload => {
+      }, _payload => {
         setHasNewNotifications(true);
         toast.success('New notification received!');
         fetchNotifications();
@@ -55,7 +55,7 @@ const NotificationBell = () => {
     };
   };
 
-  const markAsRead = async (notificationId) => {
+  const markAsRead = async (notificationId: string) => {
     try {
       const { error } = await supabase
         .from('notifications')

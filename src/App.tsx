@@ -1,4 +1,3 @@
-import React from 'react';
 import { Toaster } from 'react-hot-toast';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './contexts/AuthContext';
@@ -9,8 +8,8 @@ import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 import ReportItem from './pages/ReportItem';
 import SearchItems from './pages/SearchItems';
+import ItemDetail from './pages/ItemDetail';
 import Profile from './pages/Profile';
-import GoogleMapsWrapper from './components/GoogleMapsWrapper';
 
 const AppRoutes = () => {
   const { isAuthenticated, isLoading } = useAuth();
@@ -48,6 +47,10 @@ const AppRoutes = () => {
         element={isAuthenticated ? <SearchItems /> : <Navigate to="/login" replace />}
       />
       <Route
+        path="/item/:id"
+        element={isAuthenticated ? <ItemDetail /> : <Navigate to="/login" replace />}
+      />
+      <Route
         path="/profile"
         element={isAuthenticated ? <Profile /> : <Navigate to="/login" replace />}
       />
@@ -60,12 +63,10 @@ const AppRoutes = () => {
 function App() {
   return (
     <AuthProvider>
-      <Router>
+      <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <div className="min-h-screen bg-gray-50">
           <Toaster position="top-center" />
-          <GoogleMapsWrapper>
-            <AppRoutes />
-          </GoogleMapsWrapper>
+          <AppRoutes />
         </div>
       </Router>
     </AuthProvider>
