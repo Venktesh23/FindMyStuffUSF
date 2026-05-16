@@ -1,154 +1,90 @@
 # FindMyStuff@USF
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-green?logo=netlify)](https://guileless-kitsune-a510c3.netlify.app)
-
-A full-stack web application designed to help University of South Florida (USF) students report and recover lost items across campus. The platform provides real-time location tracking, advanced search capabilities, and seamless user authentication to facilitate efficient lost-and-found operations within the campus community.
-
-## Overview
-
-FindMyStuff@USF addresses the common challenge of lost items on university campuses by providing a centralized platform where students can report lost items, search for found items, and communicate with other users. The application leverages geolocation services to pinpoint item locations on an interactive campus map, making it easier to reunite students with their belongings.
+A web app for USF students to report and recover lost items across campus. Built with React, Supabase, and Google Maps.
 
 ## Features
 
-- **User Authentication**: Secure email/password authentication with session management
-- **Item Reporting**: Submit detailed reports for lost or found items with category classification
-- **Geolocation Services**: Interactive Google Maps integration for precise location marking
-- **Advanced Search**: Filter items by category, location, date, and keyword
-- **Real-time Updates**: Live notifications when items matching user queries are reported
-- **User Dashboard**: Centralized profile management for tracking submitted items and status updates
-- **Item Status Tracking**: Monitor the lifecycle of reported items (active, resolved, expired)
+- **User Authentication** — email/password login with session management via Supabase
+- **Item Reporting** — report lost or found items with category and location
+- **Interactive Map** — Google Maps integration for pinpointing item locations on campus
+- **Advanced Search** — filter by category, location, date, and keyword
+- **Real-time Updates** — live notifications when matching items are reported
+- **Dashboard** — track your submitted items and their status
 
-## Technology Stack
+## Tech Stack
 
-### Frontend
-- **React 18** with **TypeScript** for type-safe component development
-- **Tailwind CSS** for responsive UI design
-- **Google Maps API** for location-based features
-- **Vite** as the build tool and development server
-
-### Backend & Services
-- **Supabase** for authentication, real-time database, and storage
-- **PostgreSQL** as the primary relational database
-- **Row Level Security (RLS)** for data access control
-
-### Development Tools
-- **ESLint** for code quality
-- **TypeScript** for static type checking
-- **Git** for version control
+- **Frontend:** React 18, TypeScript, Tailwind CSS, Vite
+- **Backend:** Supabase (auth, database, real-time), PostgreSQL
+- **Maps:** Google Maps API + Places API
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js (v16 or higher)
-- npm or yarn
-- Supabase account
-- Google Maps API key
+- Node.js v16+
+- Supabase project
+- Google Maps API key (with Maps JavaScript API and Places API enabled)
 
-### Installation
+### Setup
 
-1. **Clone the repository**
+1. Clone and install:
    ```bash
    git clone https://github.com/your-username/findmystuff-usf.git
    cd findmystuff-usf
-   ```
-
-2. **Install dependencies**
-   ```bash
    npm install
    ```
 
-3. **Configure environment variables**
-   
-   Create a `.env` file in the root directory:
+2. Create a `.env` file in the root:
    ```env
    VITE_SUPABASE_URL=your-supabase-project-url
    VITE_SUPABASE_ANON_KEY=your-supabase-anon-key
    VITE_GOOGLE_MAPS_API_KEY=your-google-maps-api-key
    ```
 
-4. **Configure Google Maps API key (required for map features)**
-   
-   To fix "This page can't load Google Maps correctly" during development:
-   
-   - Go to [Google Cloud Console](https://console.cloud.google.com/) → APIs & Services → Credentials
-   - Edit your API key
-   - Under **Application restrictions** → HTTP referrers, add:
-     - `http://localhost:*`
-     - `http://127.0.0.1:*`
-   - Under **API restrictions**, ensure **Maps JavaScript API** and **Places API** are enabled
-   - Enable billing on your project (required by Google; free tier includes credits)
+3. Apply database migrations from `src/supabase/migrations/` in your Supabase project.
 
-5. **Run database migrations**
-   
-   Apply the Supabase migrations located in `src/supabase/migrations/`
-
-6. **Start the development server**
+4. Start the dev server:
    ```bash
    npm run dev
    ```
+   Then open `http://localhost:5173`.
 
-7. **Access the application**
-   
-   Navigate to `http://localhost:5173` in your browser
+### Google Maps API Setup
+
+In [Google Cloud Console](https://console.cloud.google.com/) → APIs & Services → Credentials, edit your API key:
+- **HTTP referrers:** add `http://localhost:*` for local development
+- **API restrictions:** enable Maps JavaScript API and Places API
+- Billing must be enabled (Google requires it; free tier credits apply)
 
 ## Project Structure
 
 ```
 findmystuff-usf/
 ├── src/
-│   ├── components/     # Reusable React components
+│   ├── components/     # Reusable UI components
 │   ├── pages/          # Page-level components
 │   ├── hooks/          # Custom React hooks
-│   ├── lib/            # Utility functions and configurations
-│   ├── types/          # TypeScript type definitions
-│   ├── supabase/
-│   │   └── migrations/ # Database schema migrations
-│   └── App.tsx         # Root application component
-├── public/             # Static assets
-└── package.json
+│   ├── lib/            # Utilities and config
+│   ├── types/          # TypeScript types
+│   └── supabase/
+│       └── migrations/ # Database schema
+├── public/
+└── config/             # Vite and ESLint config
 ```
 
-## Database Schema
+## Scripts
 
-The application uses PostgreSQL with the following primary tables:
-
-- **users**: User profiles and authentication data
-- **items**: Lost and found item records with metadata
-- **locations**: Geographic coordinates for item locations
-- **notifications**: User notification queue for matches and updates
-
-## Development
-
-### Available Scripts
-
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run preview` - Preview production build
-- `npm run lint` - Run ESLint
-
-### Code Style
-
-This project follows standard TypeScript and React best practices. Please ensure all code passes ESLint checks before committing.
+```bash
+npm run dev       # Start development server
+npm run build     # Build for production
+npm run preview   # Preview production build
+npm run lint      # Run ESLint
+```
 
 ## Deployment
 
-The application is deployed on Netlify with continuous deployment from the main branch. The live demo is available at the badge link above.
-
-## Contributing
-
-Contributions are welcome. Please follow these guidelines:
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/your-feature`)
-3. Commit your changes (`git commit -m 'Add new feature'`)
-4. Push to the branch (`git push origin feature/your-feature`)
-5. Open a Pull Request
+Deployable to Netlify. Set the build command to `npm run build` and publish directory to `dist`. Add all `.env` variables in Netlify's environment settings. A `_redirects` file is included in `public/` to handle React Router.
 
 ## License
 
-This project is developed as part of an academic initiative at the University of South Florida.
-
-## Contact
-
-For questions or feedback regarding this project, please open an issue on the GitHub repository.
+Developed as part of an academic initiative at the University of South Florida.
